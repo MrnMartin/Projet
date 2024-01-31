@@ -1,0 +1,36 @@
+html {
+    background-color: darkred; /* Couleur d'arrière-plan */
+    font-size: 14px; 
+    width: 100%; 
+}
+
+h1, h2 { /* Changement de taille et de couleur */
+    font-size: 2em;
+    color: midnightblue;
+}
+
+
+#page {
+    width: 90%; 
+    margin: 0 auto; 
+    background-color: teal; 
+    border: 2px solid #000; 
+}
+
+
+.entete {
+    text-align: center; 
+    
+}
+
+
+#aboutme {
+    
+}
+
+footer {
+    text-align: center; 
+    border-top: 2px solid black; 
+    padding: 20px 0; 
+}
+
