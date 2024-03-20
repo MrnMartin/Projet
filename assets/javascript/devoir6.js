@@ -1,11 +1,6 @@
 function analyserPoeme() {
     let poeme = document.getElementById("poeme").value;
 
-    if (poeme.trim() === "") {
-        alert("Le poème est vide.");
-        return;
-    }
-
     var lignes = poeme.split("\n").filter(Boolean);
 
     var motsFreq = {};
@@ -22,18 +17,14 @@ function analyserPoeme() {
 
     const richesseLexicale = (new Set(mots)).size / mots.length * 100;
 
-    var phrases = poeme.split(/[.!?]+/).filter(Boolean);
+    var phrases = poeme.split(/[.!?]+/g);
 
     var longueurMoyenneMotsParPhrase = mots.length / phrases.length;
+	
 
-    console.log('Les 10 mots les plus fréquents:');
-    console.log(top10Mots);
-    console.log('Richesse lexicale:', richesseLexicale.toFixed(2) + '%');
-    console.log('Nombre de phrases:', phrases.length);
-    console.log('Longueur moyenne des mots par phrase:', longueurMoyenneMotsParPhrase.toFixed(2));
+	let display = document.getElementById("resultFinal");
+    display.innerText = "Top 10 mots: " + top10Mots.join(", ") + "\n" + "Richesse lexicale: " + richesseLexicale + "\n" + "Phrases: " + phrases.length + "\n" + "Longueur moyenne des mots par phrase: " + longueurMoyenneMotsParPhrase;
 }
-
-document.getElementById("my-button").addEventListener("click", analyserPoeme);
 
 
 
