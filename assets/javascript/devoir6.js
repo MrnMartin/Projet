@@ -1,7 +1,7 @@
 function analyserPoeme() {
     let poeme = document.getElementById("poeme").value;
 
-    var lignes = poeme.split("\n").filter(Boolean);
+    var lignes = poeme.split("\n");
 
     var motsFreq = {};
     var mots = lignes.join(" ").split(/\s+/);
