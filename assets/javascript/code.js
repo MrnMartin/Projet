@@ -70,6 +70,4 @@ document.getElementById('segmentation').addEventListener('click', segmenterTexte
 let display = document.getElementById("resultFinal");
     display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
 }
-
-
 }
