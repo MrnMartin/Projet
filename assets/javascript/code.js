@@ -76,10 +76,6 @@ Object.keys(mots_len).sort((a, b) => mots_len[a].length - mots_len[b].length).fo
 });
 tableau += "</table>";
 
-let display = document.getElementById("resultFinal");
-    display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
-}
-}
 
 function CoocurencesetF() {
  const term = document.getElementById("fileinput").value.trim().toLowerCase();
@@ -97,4 +93,9 @@ function CoocurencesetF() {
    function tbCooccurrences(tbcoo) {
     const table = document.getElementById("page-analysis");
     table.innerHTML = "<table><tr><th>Co-fréquence</th><th>Fréquence gauche</th><th>Fréquence droite</th><th>% Fréquence gauche</th><th>% Fréquence droite</th></tr>";
+   }
+	   
+let display = document.getElementById("resultFinal");
+    display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
+}
 }
