@@ -48,25 +48,33 @@ function segmenterTexte() {
         return mot.trim() !== '';
 
     // trier les mots par longueur croissante
-    var mots_len=[]
-	mots_len.forEach(fonction(mot){
-		if (mot.trim() !== ""){
-			mots_len[mot] = mot.lenght;
-		}
-		else {
-		}
-	});
-			
-    });
+   var mots_len = {};
 
-    // afficher le nombre total de mots
-    var nombreMots = mots.length;
- 
-
-    // afficher les mots par longueur croissante dans un tableau
- var tableau = "<table><tr><th>Mot</th><th>Longueur</th><th>Nombre de lettres</th></tr>";
+// Compter les occurrences de mots et leurs longueurs
 mots.forEach(function(mot) {
-    tableau += "<tr><td>" + mot + "</td><td>" + mot.length + "</td><td>" + countLetters(mot) + "</td></tr>";
+    const trimmedMot = mot.trim();
+    if (trimmedMot !== "") {
+        if (!mots_len[trimmedMot]) {
+            mots_len[trimmedMot] = {
+                length: trimmedMot.length,
+                letterCount: countLetters(trimmedMot),
+                occurrences: 1
+            };
+        } else {
+            mots_len[trimmedMot].occurrences++;
+        }
+    }
+});
+
+// Afficher le nombre total de mots
+var nombreMots = Object.keys(mots_len).length;
+
+// Afficher les mots par longueur croissante dans un tableau
+var tableau = "<table><tr><th>Mot</th><th>Longueur</th><th>Nombre de lettres</th><th>Occurrences</th></tr>";
+Object.keys(mots_len).sort((a, b) => mots_len[a].length - mots_len[b].length).forEach(function(mot) {
+    tableau += "<tr><td>" + mot + "</td><td>" + mots_len[mot].length + "</td><td>" + mots_len[mot].letterCount + "</td><td>" + mots_len[mot].occurrences + "</td></tr>";
+});
+tableau += "</table>";
 
 let display = document.getElementById("resultFinal");
     display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
