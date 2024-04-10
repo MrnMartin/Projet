@@ -40,9 +40,10 @@ function segmenterTexte() {
     var texte = document.getElementById fileDisplayArea.innerText;
 
     // diviser le texte en mots en utilisant les délimiteurs présents dans la page HTML
-    var mots = fileDisplayArea.split(,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/);
+    var mots = fileDisplayArea.split(",;’~|&#@=`-.?!%*$()[]{}_:+«»§\/");
 
-    // enlever les mots vides
+    }
+
     mots = mots.filter(function(mot) {
         return mot.trim() !== '';
 
@@ -72,3 +73,11 @@ let display = document.getElementById("resultFinal");
 }
 }
 
+function CooccurrencesetF() {
+ const term = document.getElementById("fileinput").value.trim().toLowerCase();
+ const length = parseInt(document.getElementById("lgID").value);
+
+ if (!term || isNaN(length) || length <= 0) {
+  alert("Veuillez entrer un terme valide et une longueur valide.");
+  return;
+    }
