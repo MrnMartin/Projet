@@ -64,12 +64,9 @@ function segmenterTexte() {
  
 
     // afficher les mots par longueur croissante dans un tableau
-    var tableau = "<table><tr><th>Mot</th><th>Longueur</th></tr>";
-    mots.forEach(function(mot) {
-        tableau += "<tr><td>" + mot + "</td><td>" + mot.length + "</td></tr>";
-    });
-    tableau += "</table>";
-}
+ var tableau = "<table><tr><th>Mot</th><th>Longueur</th><th>Nombre de lettres</th></tr>";
+mots.forEach(function(mot) {
+    tableau += "<tr><td>" + mot + "</td><td>" + mot.length + "</td><td>" + countLetters(mot) + "</td></tr>";
 
 let display = document.getElementById("resultFinal");
     display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
