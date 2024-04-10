@@ -81,3 +81,12 @@ function CoocurencesetF() {
   alert("Veuillez entrer un terme valide et une longueur valide.");
   return;
     }
+
+ const text = document.getElementById("fileDisplayArea").innerText;
+    const words = text.split(/[ ,;’'~|&#@=`-.?!%*$()\[\]{}_:+«»§\/]+/).filter(word => word.trim() !== '');
+
+	
+   function tbCooccurrences(tbcoo) {
+    const table = document.getElementById("page-analysis");
+    table.innerHTML = "<table><tr><th>Co-fréquence</th><th>Fréquence gauche</th><th>Fréquence droite</th><th>% Fréquence gauche</th><th>% Fréquence droite</th></tr>";
+}
