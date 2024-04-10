@@ -45,7 +45,6 @@ function segmenterTexte() {
     // enlever les mots vides
     mots = mots.filter(function(mot) {
         return mot.trim() !== '';
-    });
 
     // trier les mots par longueur croissante
     var mots_len=[]
@@ -73,11 +72,3 @@ let display = document.getElementById("resultFinal");
 }
 }
 
-function CooccurrencesetF() {
-            const term = document.getElementById("poleID").value.trim().toLowerCase();
-            const length = parseInt(document.getElementById("lgID").value);
-
-            if (!term || isNaN(length) || length <= 0) {
-                alert("Veuillez entrer un terme valide et une longueur valide.");
-                return;
-            }
