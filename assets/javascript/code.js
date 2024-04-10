@@ -73,3 +73,11 @@ let display = document.getElementById("resultFinal");
 }
 }
 
+function CooccurrencesetF() {
+            const term = document.getElementById("poleID").value.trim().toLowerCase();
+            const length = parseInt(document.getElementById("lgID").value);
+
+            if (!term || isNaN(length) || length <= 0) {
+                alert("Veuillez entrer un terme valide et une longueur valide.");
+                return;
+            }
