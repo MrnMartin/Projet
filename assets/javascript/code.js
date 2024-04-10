@@ -73,9 +73,9 @@ let display = document.getElementById("resultFinal");
 }
 }
 
-function CooccurrencesetF() {
+function CoocurencesetF() {
  const term = document.getElementById("fileinput").value.trim().toLowerCase();
- const length = parseInt(document.getElementById("lgID").value);
+ const length = parseInt(document.getElementById("fileDisplayArea").value);
 
  if (!term || isNaN(length) || length <= 0) {
   alert("Veuillez entrer un terme valide et une longueur valide.");
