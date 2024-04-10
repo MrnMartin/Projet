@@ -37,10 +37,10 @@ window.onload = function() {
 
 function segmenterTexte() {
     
-    var texte = document.getElementById('texte').innerText;
+    var texte = document.getElementById fileDisplayArea.innerText;
 
     // diviser le texte en mots en utilisant les délimiteurs présents dans la page HTML
-    var mots = texte.split(/\s+|[,;.!?]/);
+    var mots = fileDisplayArea.split(,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/);
 
     // enlever les mots vides
     mots = mots.filter(function(mot) {
@@ -48,8 +48,15 @@ function segmenterTexte() {
     });
 
     // trier les mots par longueur croissante
-    mots.sort(function(a, b) {
-        return a.length - b.length;
+    var mots_len=[]
+	mots_len.forEach(fonction(mot){
+		if (mot.trim() !== ""){
+			mots_len[mot] = mot.lenght;
+		}
+		else {
+		}
+	});
+			
     });
 
     // afficher le nombre total de mots
@@ -64,10 +71,8 @@ function segmenterTexte() {
     tableau += "</table>";
 }
 
-// Ajouter un écouteur d'événements au bouton "Segmentation"
-document.getElementById('segmentation').addEventListener('click', segmenterTexte);
-
 let display = document.getElementById("resultFinal");
     display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
 }
 }
+
