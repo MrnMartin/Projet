@@ -110,3 +110,70 @@ for (let elem of ordered){
 
 result.innerHTML =`<p>Le  texte contient au total ${cleaned_words.length} mots.<p/>`;
 result.append(table);
+
+function pie_chars() {
+    // récupération du contenu du fichier texte
+    const output = document.getElementById("fileDisplayArea").innerText;
+
+    //récupération des délimiteurs de mots
+    let delimiters = document.getElementById("delimID").value;
+
+
+    //Corrections de la liste de délimiteurs pour éviter des erreurs dans l'expression régulière
+    delim2 = delimiters.replace("-", "\\-"); //échappement du tiret, comme il entouré d'autres caractères, il sera considéré comme marquant un intervalle comme dans [4-9]
+    delim2 = delim2.replace("[", "\\["); // échappement des crochets ouverts
+    delim2 = delim2.replace("]", "\\]"); // échappement des crochets fermants
+    delim2 = delim2 + "—"; //facultatif: ajout des tirets longs
+    delim2 = delim2 + "\\s";//ajout de tous les symboles d'espacement
+
+
+    //Construction de l'expression régulière pour découper les mots
+
+    let word_regex = new RegExp("[" + //crochet ouvert pour signifier l'alternative 
+        delim2 +
+        "]", 'g'); // pour enlever plusieurs délimiteurs 
+
+
+
+    all_words = output.split(word_regex);
+
+    cleaned_words = all_words.filter(x => x.trim() != '') // pour ne garder que les tokens non vides 
+
+    // Création d'un dictionnaire de fréquence de mots par nombre de caractères
+
+    let dic_length = {};
+
+    for (let word of cleaned_words) {
+        if (word.length in dic_length) {
+            dic_length[word.length] += 1;
+
+        }
+        else {
+            dic_length[word.length] = 1;
+
+        }
+    }
+
+    //Création de listes pour peupler le dictionnaire data
+    ordered = Object.keys(dic_length).sort((a, b) => a - b);
+
+    let size_chars = [];
+
+
+    for (let elem of ordered) {
+        size_chars.push(dic_length[elem]);
+    }
+
+    let data = { labels: ordered, series: size_chars };
+
+    // Option d'affichage
+    let options = {
+        width: 400,
+        height: 200
+    };
+
+    //Ecriture dans la page HTML
+
+    document.getElementById('page-analysis').innerHTML = '';
+    new Chartist.Pie("#page-analysis", data, options);
+}
