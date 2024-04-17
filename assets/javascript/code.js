@@ -35,116 +35,78 @@ window.onload = function() {
     });
 }
 
-function segmenterTexte() {
+
+function sort_words() {
+
+// récupération du contenu du fichier texte
+const output = document.getElementById("fileDisplayArea").innerText;
+
+//balise pour écriture des résultats
+let result =  document.getElementById("page-analysis");
+
+//récupération des délimiteurs de mots
+let delimiters = document.getElementById("delimID").value;
+
+
+//Corrections de la liste de délimiteurs pour éviter des erreurs dans l'expression régulière
+delim2 = delimiters.replace("-", "\\-") ; //échappement du tiret, comme il entouré d'autres caractères iol sera considéré comme marquant un intervalle comme dans [4-9]
+delim2 = delim2.replace("[", "\\[") ; // échappement des crochets ouverts
+delim2 = delim2.replace("]", "\\]") ; // échappement des crochets fermants
+delim2 = delim2 + "—"; //facultatif: ajout des tirets longs
+delim2 = delim2 + "\\s" ;//a jout de tous les symboles d'espacement
+
+
+//Construction de l'expression régulière pour découper les mots
+
+let word_regex = new RegExp ( "[" + //crochet ouvert pour signifier l'alternative 
+                            delim2 +                      
+                            "]" , 'g'); // pour enlever plusieurs délimiteurs 
+
+
+
+all_words = output.split(word_regex);
+
+cleaned_words = all_words.filter(x => x.trim() != '') // pour ne garder que les tokens non vides 
+
+let dic_length={};
+
+for (let word of cleaned_words){
+    if (word.length in dic_length){
+        dic_length[word.length]["freq"] += 1;
+        if (dic_length[word.length] ["elements"].includes(word.toLowerCase())) {
+           
+        }
+        else{
+            dic_length[word.length] ["elements"].push(word.toLowerCase());
+        }
+      
+    }
+    else {
+         dic_length[word.length]= {}
+         dic_length[word.length]["freq"] = 1;
+         dic_length[word.length] ["elements"]= [word.toLowerCase()]   ;   
+
+    }
+}
+
+let table = document.createElement("table");
+table.style.margin = "auto";
+let head = table.appendChild(document.createElement("tr"));
+head.innerHTML = "<th>Nombre de caractères</th><th>Nombre d'occurrences</th><th>Formes(s) unique(s)</th>";
+
+ordered = Object.keys(dic_length).sort((a, b) => a - b);
+
+for (let elem of ordered){
+    let row = table.appendChild(document.createElement("tr"));
+    let cell_length = row.appendChild(document.createElement("td"));
+    let cell_total = row.appendChild(document.createElement("td"));
+    let cell_details = row.appendChild(document.createElement("td"));
+    cell_length.innerHTML = elem;
+    cell_total.innerHTML = dic_length[elem]["freq"];
+    cell_details.innerHTML = dic_length[elem]["elements"].sort().join(', ') +' ('+ dic_length[elem]["elements"].length +')';
     
-    var texte = document.getElementById fileDisplayArea.innerText;
 
-    // diviser le texte en mots en utilisant les délimiteurs présents dans la page HTML
-    var mots = fileDisplayArea.split(",;’~|&#@=`-.?!%*$()[]{}_:+«»§\/");
-
-    }
-
-    mots = mots.filter(function(mot) {
-        return mot.trim() !== '';
-
-    // trier les mots par longueur croissante
-   var mots_len = {};
-
-// Compter les occurrences de mots et leurs longueurs
-mots.forEach(function(mot) {
-    const trimmedMot = mot.trim();
-    if (trimmedMot !== "") {
-        if (!mots_len[trimmedMot]) {
-            mots_len[trimmedMot] = {
-                length: trimmedMot.length,
-                letterCount: countLetters(trimmedMot),
-                occurrences: 1
-            };
-        } else {
-            mots_len[trimmedMot].occurrences++;
-        }
-    }
-});
-
-// Afficher le nombre total de mots
-var nombreMots = Object.keys(mots_len).length;
-
-// Afficher les mots par longueur croissante dans un tableau
-var tableau = "<table><tr><th>Mot</th><th>Longueur</th><th>Nombre de lettres</th><th>Occurrences</th></tr>";
-Object.keys(mots_len).sort((a, b) => mots_len[a].length - mots_len[b].length).forEach(function(mot) {
-    tableau += "<tr><td>" + mot + "</td><td>" + mots_len[mot].length + "</td><td>" + mots_len[mot].letterCount + "</td><td>" + mots_len[mot].occurrences + "</td></tr>";
-});
-tableau += "</table>";
-
-// Fonction pour trouver les co-occurrences dans le texte
-function CoocurencesetF() {
-// Récupérer le terme saisi par l'utilisateur et la longueur de l'intervalle
- const term = document.getElementById("fileinput").value.trim().toLowerCase();
- const length = parseInt(document.getElementById("fileDisplayArea").value);
-	
-// Vérifier si le terme et la longueur sont valides
- if (!term || isNaN(length) || length <= 0) {
-  alert("Veuillez entrer un terme valide et une longueur valide.");
-  return;
-    }
-	
-// Récupérer le texte du fichier
- const text = document.getElementById("fileDisplayArea").innerText;
- // Diviser le texte en mots	
-    const words = text.split(/[ ,;’'~|&#@=`-.?!%*$()\[\]{}_:+«»§\/]+/).filter(word => word.trim() !== '');
-	
- // Initialiser un dictionnaire pour stocker les co-occurrences
-const cooccurrences = {};
-
-// Parcourir tous les mots du texte
-words.forEach((word, i) => {
- // Vérifier si le mot correspond au terme saisi	
-    if (word === term) {
-	// Déterminer l'indice de début et de fin de la fenêtre autour du mot    
-        const startIndex = Math.max(0, i - length);
-        const endIndex = Math.min(words.length - 1, i + length);
-         // Parcourir les mots dans la fenêtre autour du mot
-        for (let j = startIndex; j <= endIndex; j++) {
-	 // Ne pas compter le mot lui-même
-            if (i !== j && Math.abs(i - j) <= length) {
-                const coWord = words[j];
-	// MAJ les co-occurrences dans le dictionnaire
-                if (!cooccurrences[coWord]) {
-                    cooccurrences[coWord] = { coFrequency: 0, leftFrequency: 0, rightFrequency: 0 };
-                }
-                cooccurrences[coWord].coFrequency++;
-                if (j < i) {
-                    cooccurrences[coWord].leftFrequency++;
-                } else {
-                    cooccurrences[coWord].rightFrequency++;
-                }
-            }
-        }
-    }
-});
-
-}	
-// Fonction pour afficher les co-occurrences dans le tableau	
-   function tbCooccurrences(tbcoo) {
-    const table = document.getElementById("page-analysis");
-    table.innerHTML = "<table><tr><th>Co-fréquence</th><th>Fréquence gauche</th><th>Fréquence droite</th><th>% Fréquence gauche</th><th>% Fréquence droite</th></tr>";
-   }
-	    
- // Parcourir le dictionnaire des co-occurrences
-    Object.entries(tbcooccurrences).forEach(([word, data]) => {
-        const { coFrequency, leftFrequency, rightFrequency } = data;
-        const totalFrequency = leftFrequency + rightFrequency;
-        const leftPercentage = totalFrequency > 0 ? ((leftFrequency / totalFrequency) * 100).toFixed(2) : 0;
-        const rightPercentage = totalFrequency > 0 ? ((rightFrequency / totalFrequency) * 100).toFixed(2) : 0;
-
-        // Ajouter une nouvelle ligne au tableau pour chaque co-occurrence
-        const row = table.insertRow();
-        [coFrequency, leftFrequency, rightFrequency, leftPercentage + "%", rightPercentage + "%"].forEach(value => {
-            row.insertCell().textContent = value;
-        });
-    });
-}	    
-	   
-    display.innerText = "Nombre de mots: " + nombreMots(", ") + "\n" + "Tableau: " + tableau;
 }
-}
+
+result.innerHTML =`<p>Le  texte contient au total ${cleaned_words.length} mots.<p/>`;
+result.append(table);
