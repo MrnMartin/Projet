@@ -1,0 +1,16 @@
+.ct-bar {
+    stroke: none; 
+}
+
+.ct-series .ct-bar:nth-child(1) {
+    fill: red; 
+}
+
+.ct-series .ct-bar:nth-child(2) {
+    fill: green; 
+}
+
+.ct-series .ct-bar:nth-child(3) {
+    fill: blue; 
+}
+
