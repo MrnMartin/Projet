@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="http://www.tal.univ-paris3.fr/plurital/logo.ico">
     <title>Lecture des données dans un fichier...</title>
-    <script type="text/javascript" language="javascript" src="../javascript/code.js"></script>
+    <script type="text/javascript" language="javascript" src="../javascript/code_projet_tache1.js"></script>
+	<script type="text/javascript" language="javascript" src="../librairie/code_chartist.js"></script>
     <link rel="stylesheet" href="../css/monstyle.css" />
+	<link rel="stylesheet" href="../librairie/chartist.css" />
 </head>
-
 <body>
     <div id="page">
         <div id="container">
@@ -43,26 +43,30 @@
                     </small>
                     <br />
                     <br />
-                    <button onclick="alert('bonjour');"><span>Bonjour</span></button>
+                    <button onclick="alert('Bonjour, veuillez télécharger un fichier pour commencer l\'analyse');"><span>Bonjour</span></button>
                     <br />
                     <br />
-                    <button class="segmentation" onclick="segmenterTexte();">Segmentation</button>
-                    <button class="submit" onclick="CoocurencesetF();"><span>Cooccurrents/fréquence</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+                    <button class="submit" onclick="sortWords()">Segmentation</button>
+                    <button class="submit" onclick="afficherCooccurrents()"><span>Cooccurrents/fréquence</span></button>
+                    <button class="submit" onclick=""><span>Visualisation Cooccurrents</span></button>
                 </p>
-            </div>
+				<center>
+				<button onclick="Message()">Afficher/Cacher le message</button>
+				</center>
+				<div id="message" style="display: none;">
+				<p> Bonjour, besoin d'aide ?</br>
+				Voici quelques explications</br>
+				La <strong> Segmentation </strong> permettra de diviser le texte en mots.</br>
+				La <strong> Cooccurrents/fréquence </strong> permettra de savoir la cooccurrence d'un mot, la co-fréquence mais aussi la fréquence gauche et droite sous forme de tableau.</br></p>
+				</p>
+				</div>
             <div id="logger" style="width:100%"></div>
             <br />
             <div id="Global">
                 <div id="fileDisplayArea"></div>
-                <div id="page-analysis"></div>
+                <div id="page-analysis" class="ct-chart">></div>
             </div>
         </div>
     </div>
-</body>
-    
+</body>   
 </html>
