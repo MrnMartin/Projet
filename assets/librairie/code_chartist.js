@@ -120,20 +120,3 @@ function pieChars() {
     document.getElementById('page-analysis').innerHTML = '';
     new Chartist.Pie("#page-analysis", data, options);
 }
-
-function graphiqueLigne() {
-    let data = {
-        labels: ["a", "b", "c", "d"],
-        series: [[1, 2, 3, 4]] 
-    };
-
-    let options = {
-        width: 800,
-        height: 450
-    };
-
-    document.getElementById('page-analysis').innerHTML = '';
-    new Chartist.Line("#page-analysis", data, options);
-}
-
-
