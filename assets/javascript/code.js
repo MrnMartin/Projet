@@ -41,6 +41,24 @@ window.onload = function () {
     });
 }
 
+function empty() {
+    const fileDisplayArea = document.getElementById('fileDisplayArea');
+    if (fileDisplayArea.innerText.trim() === "") {
+        alert("Veuillez saisir un fichier s'il vous plaît format txt.");
+        return true;
+		  }
+    return false;
+}
+
+function emptys() {
+    const fileDisplayArea = document.getElementById('fileDisplayArea');
+    if (fileDisplayArea.innerText.trim() === "") {
+        alert("Désolé je n'ai pas réussi.");
+        return true;
+		  }
+    return false;
+}
+
 function sortWords() {
     const output = document.getElementById("fileDisplayArea").innerText;
     const result = document.getElementById("page-analysis");
@@ -107,8 +125,8 @@ function afficherErreur(message) {
     document.getElementById("page-analysis").innerHTML = '<span class="errorlog">' + message + '</span>';
 }
 
-
 function afficherCooccurrents() {
+	if (empty()) return;
     const texte = document.getElementById("fileDisplayArea").innerText;
     const pole = document.getElementById("poleID").value.toLowerCase().trim();
     const longueur = parseInt(document.getElementById("lgID").value);
@@ -160,3 +178,50 @@ function afficherCooccurrents() {
     tableauHTML += '</table>';
     document.getElementById("page-analysis").innerHTML = tableauHTML;
 }
+
+function affGraph(){
+	if (emptys()) return;
+ }
+
+ //Voici ce que j'ai essayé pour le graphique mais sans succès.
+ 
+ //function freqmot(texte) {
+	 //const mots = texte.split(/\b\w+\b/g);
+	 //const freqs = {};
+	 
+	 //mots.forEach(function(mot) {
+		// if (!freqs[mot]) { 
+            //freqs[mot] = 0; 
+        //}
+       // freqs[mot] += 1; 
+    //});
+  //  return freqs; 
+// }
+
+//function freqbarre() {
+	//var max = 10
+	//var text = document.getElementById("fileDisplayArea").innerText
+	//var freqs = freqmot(text.toLowerCase());
+	//var label = [];
+	//var serie = [];
+	
+	//if(label.length < max){
+		//label.push(mot);
+		//serie.push(freq[mot]);
+	//}
+	
+	//var data = {
+		//labels: label,
+		//series: [serie]
+	//};
+	
+	//var options = {
+		//width: 100,
+		//height: 400,
+		//seriesBarDistance: 10,
+		//reverseData: true,
+	//horizontalBars: true,
+	//}
+	
+	//document.getElementById('page-analysis').innerHTML = ""; 
+	//new Chartist.Bar('ct-chart', data, options);
