@@ -225,3 +225,4 @@ function affGraph(){
 	
 	//document.getElementById('page-analysis').innerHTML = ""; 
 	//new Chartist.Bar('ct-chart', data, options);
+	
